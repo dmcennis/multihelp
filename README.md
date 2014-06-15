@@ -10,10 +10,14 @@ Localization (version 0.2 and later) is provided by separate documentation direc
 
 ##Supported Documentation Types
 
-+ ###HTML:	Loads only HTML pages, but uses the Magic file checker on each subdirectory to determine its file type. The navigation title is the file name minus the .html extension
++ ###HTML:	
+Loads only HTML pages, but uses the Magic file checker on each subdirectory to determine its file type. The navigation title is the file name minus the .html extension
 
-+ ###Javadoc:	Loads all Javadoc html files normally navigable from the base index.html page. It assumes all subdirectories are also Javadoc directories.
++ ###Javadoc:	
+Loads all Javadoc html files normally navigable from the base index.html page. It assumes all subdirectories are also Javadoc directories.
 
-+ ###Source:	Pretty prints source code, html, and xml files. It uses the Magic check on sub-directories to determine what their sub-type is.
++ ###Source:	
+Pretty prints source code, html, and xml files. It uses the Magic check on sub-directories to determine what their sub-type is.
 
-+ ###Default:	Checks all files and sub-directories using the Magic check to determine their type. Only recognised files are included.
++ ###Default:	
+Checks all files and sub-directories using the Magic check to determine their type. Only recognised files are included.
