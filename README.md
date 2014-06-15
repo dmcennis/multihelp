@@ -21,3 +21,19 @@ Pretty prints source code, html, and xml files. It uses the Magic check on sub-d
 
 + ###Default:	
 Checks all files and sub-directories using the Magic check to determine their type. Only recognised files are included.
+
+##Adding a New Documentation Type
+Subclass FileNode and implement the following methods:
+
++ ###Constructor: 
+builds the object with the given URL reference.
+
++ ###Traverse Directory: 
+Either load the given file or descend into the directory, loading a JTree with the appropriate FileNode objects.
+
++ ###Display: 
+Display the FileNode in the navigation window. If null, it uses the defaults. Otherwise, it is a DefaultTreeCellRenderer.
+
++ ###Load Page: 
+Load a page of documentation into the given HTML browser.
+Add a new 'Magic' entry to FileNode
