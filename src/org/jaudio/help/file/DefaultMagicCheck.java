@@ -23,7 +23,7 @@ public class DefaultMagicCheck implements MagicCheck {
 			File[] children = root.listFiles();
 			boolean html = false;
 			for(int i=0;i<children.length;++i){
-				if(children[i].getName().equals("allclasses-frame.html")){
+				if(children[i].getName().compareTo("allclasses-frame.html")==0){
 					return new JavadocFile(root);
 				}
 				if(children[i].getName().endsWith(".java")){

@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,13 +54,15 @@ public class DefaultFile extends FileNode {
 
 		Pattern  amp = Pattern.compile("&");
 		match = amp.matcher(file);
-		file = match.replaceAll("&amp;");	
+		file = match.replaceAll("&amp;");
 		viewer.set("<html><body><pre>"+file+"</pre></body></html>");
 		} catch (FileNotFoundException e) {
-			viewer.set("<html><body>ERROR: Help file '"+base.getAbsolutePath()+"' not found</body></html>");
+			ResourceBundle bundle =ResourceBundle.getBundle("Translations");
+			viewer.set(String.format(bundle.getString("html.body.error.help.file.s.not.found.body.html"),base.getAbsolutePath()));
 			e.printStackTrace();
 		} catch (IOException e) {
-			viewer.set("<html><body>ERROR: Help file '"+base.getAbsolutePath()+"' had an IO error</body></html>");
+			ResourceBundle bundle =ResourceBundle.getBundle("Translations");
+			viewer.set(String.format(bundle.getString("html.body.error.help.file.s.had.an.io.error.body.html"),base.getAbsolutePath()));
 			e.printStackTrace();
 		}
 	}

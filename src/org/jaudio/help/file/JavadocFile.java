@@ -8,6 +8,7 @@ package org.jaudio.help.file;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -70,9 +71,11 @@ public class JavadocFile extends FileNode {
 			ret.append("<ul></body></html>");
 			return ret.toString();
 		}else if(fileLocation.isDirectory()){
-			return "<html><body>ERROR: Empty directory in the help system.</body></html>";
+			ResourceBundle bundle =ResourceBundle.getBundle("Translations");
+			return bundle.getString("html.body.error.empty.directory.in.the.help.system.body.html1");
 		}else{
-			return "<html><body>INTERNAL ERROR: Loading non-existant file</body></html>";
+			ResourceBundle bundle =ResourceBundle.getBundle("Translations");
+			return bundle.getString("html.body.internal.error.loading.non.existant.file.body.html1");
 		}
 	}
 

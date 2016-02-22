@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -69,7 +70,7 @@ public class HTMLFile extends FileNode {
 		 */
 		public boolean accept(File pathname) {
 			if(pathname.getName().endsWith("*.html")||pathname.getName().endsWith("*.htm")){
-				if(pathname.getName().equals("index.html")){
+				if(pathname.getName().compareTo("index.html")==0){
 					return false;
 				}else{
 					return true;
@@ -90,9 +91,11 @@ public class HTMLFile extends FileNode {
 			ret.append("<ul></body></html>");
 			return ret.toString();
 		}else if(fileLocation.isDirectory()){
-			return "<html><body>ERROR: Empty directory in the help system.</body></html>";
+			ResourceBundle bundle =ResourceBundle.getBundle("Translations");
+			return bundle.getString("html.body.error.empty.directory.in.the.help.system.body.html");
 		}else{
-			return "<html><body>INTERNAL ERROR: Loading non-existant file</body></html>";
+			ResourceBundle bundle =ResourceBundle.getBundle("Translations");
+			return bundle.getString("html.body.internal.error.loading.non.existant.file.body.html");
 		}
 	}
 	
