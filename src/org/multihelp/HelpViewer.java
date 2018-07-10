@@ -9,6 +9,7 @@ package org.multihelp;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 
 import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
@@ -35,7 +36,13 @@ public class HelpViewer extends JEditorPane {
 	protected FileTreeReader fileSource;
 	
 	protected FileNode currentNode;
-	
+
+	protected Locale nativeLocale = Locale.ENGLISH;
+
+	public void setDefaultStringLocale(Locale l){
+		nativeLocale = l;
+	}
+
 	private TreeSelectionListener processFileSelection = new TreeSelectionListener() {
 		public void valueChanged(TreeSelectionEvent arg0) {
 			
