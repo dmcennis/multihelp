@@ -12,5 +12,5 @@ import org.multihelp.file.MagicCheck;
  * Default Description Interface MagicRegistrant
  */
 public interface MagicRegistrant extends MagicCheck {
-    public void registerMagicCheck(LegacyMagicRegistrant reigistry);
+    public void registerMagicCheck(LocalMagicRegistry reigistry);
 }
