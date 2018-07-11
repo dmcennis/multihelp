@@ -1,0 +1,5 @@
+<dependency>
+    <groupId>com.google.cloud</groupId>
+    <artifactId>google-cloud-translate</artifactId>
+    <version>1.35.0</version>
+</dependency>

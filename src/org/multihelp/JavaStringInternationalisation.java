@@ -6,6 +6,10 @@
 
 package org.multihelp;
 
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.TranslateOptions;
+import com.google.cloud.translate.Translation;
+
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -14,7 +18,9 @@ import java.util.ResourceBundle;
  */
 public class JavaStringInternationalisation {
 
-    public static Locale nativeLocale = Locale.ENGLISH;
+    public static Locale defaultDocumenationLanguage = Locale.ENGLISH;
+
+    public static Locale defaultDisplayLanguage = Locale.getDefault();
 
     public static class OnlineTranslation extends java.util.ResourceBundle.Control{
         @Override
@@ -37,16 +43,16 @@ public class JavaStringInternationalisation {
 
     ResourceBundle helpResourceBundle = null;
 
-//    Translation translate = null;
+    Translate translate = null;
 
     protected boolean autoTranslate;
 
     public String internationalize(String source){
-        return internationalize(nativeLocale,source,Locale.getDefault());
+        return internationalize(defaultDocumenationLanguage,source,defaultDisplayLanguage);
     }
 
     public String internationalize(Locale sourceLocale, String source){
-        return internationalize(sourceLocale,source,Locale.getDefault());
+        return internationalize(sourceLocale,source,defaultDisplayLanguage);
     }
 
     public String internationalize(Locale sourceLocale, String source, Locale destinationLocale){
@@ -59,11 +65,16 @@ public class JavaStringInternationalisation {
         if(helpResourceBundle.containsKey(source)){
             return helpResourceBundle.getString(source);
         }
-//        if(translate == null){
-//            translate = TranslateOptions.getDefaultInstance().getService();
-//        }
-//
-//        return translate.translate(source,sourceLocale,destinationLocale);
-        return "";
+        if(autoTranslate) {
+            if (translate == null) {
+                TranslateOptions.Builder builder = TranslateOptions.newBuilder();
+                builder.setTargetLanguage(destinationLocale.getDisplayLanguage());
+                defaultDisplayLanguage = destinationLocale;
+                translate = (new TranslateOptions.DefaultTranslateFactory()).create(builder.build());
+            }
+            return (translate.translate(source)).getTranslatedText();
+        }else{
+            return source;
+        }
     }
 }

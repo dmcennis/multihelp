@@ -37,10 +37,10 @@ public class HelpViewer extends JEditorPane {
 	
 	protected FileNode currentNode;
 
-	protected Locale nativeLocale = Locale.ENGLISH;
+	JavaStringInternationalisation translator = new JavaStringInternationalisation();
 
 	public void setDefaultStringLocale(Locale l){
-		nativeLocale = l;
+		JavaStringInternationalisation.defaultDisplayLanguage = l;
 	}
 
 	private TreeSelectionListener processFileSelection = new TreeSelectionListener() {
@@ -73,7 +73,7 @@ public class HelpViewer extends JEditorPane {
 		this.fileSource = fileSource;
 		setEditable(false);
 		try {
-			JavadocFile n = new JavadocFile(new File("C:\\Users\\user\\Documents\\eclipse-source\\jAudioHelp\\extras\\javadoc\\"));
+			JavadocFile n = new JavadocFile(new File("."));
 			n.setPage(this);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -84,10 +84,11 @@ public class HelpViewer extends JEditorPane {
 	
 	public void set(URL source) throws IOException{
 		setPage(source);
+		setText(translator.internationalize(getText()));
 	}
 	
 	public void set(String source){
-		this.setText(source);
+		this.setText(translator.internationalize(source));
 		this.setContentType("text.html");
 	}
 }
