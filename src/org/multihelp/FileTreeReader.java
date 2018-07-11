@@ -44,7 +44,7 @@ public class FileTreeReader extends JTree{
 			Logger.getLogger(this.getClass().getName()).log(Level.WARNING,translator.internationalize(Locale.ENGLISH,"The target top level directory for the help system is not a directory. Using '.' instead."));
 		}
 
-		if(JavaStringInternationalisation.nativeLocale == Locale.getDefault()){
+		if(JavaStringInternationalisation.defaultDocumenationLanguage == Locale.getDefault()){
 			translator.autoTranslate=false;
 		}else{
 			File[] child = source.listFiles();
@@ -59,7 +59,7 @@ public class FileTreeReader extends JTree{
 		FileNode base = FileNode.determineType(source);
 		setModel(new DefaultTreeModel(base));
 		if ((source != null) && source.exists() && source.isDirectory()) {
-			base.traverseFileSystem( source, 0, translator);
+			base.traverseFileSystem( source, 0);
 		}
 		getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 	}

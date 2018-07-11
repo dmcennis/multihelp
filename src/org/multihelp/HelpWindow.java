@@ -6,14 +6,10 @@
  */
 package org.multihelp;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
+import java.awt.*;
 import java.io.File;
 
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
+import javax.swing.*;
 
 /**
  * HelpWindow
@@ -26,15 +22,39 @@ public class HelpWindow extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private JFrame leftFrame;
+
 	private FileTreeReader leftPane;
 
 	private HelpViewer rightPane;
-	
+
+	private FileNodeMomento momento;
+
 	public HelpWindow() {
 		super();
+		leftFrame = new JFrame();
+		leftFrame.setLayout(new BorderLayout());
+
+		JButton back = new JButton();
+		back.setIcon(new ImageIcon("BackActive.png"));
+		back.setDisabledIcon(new ImageIcon("BackDisabled.png"));
+
+		JButton forward = new JButton();
+		forward.setIcon(new ImageIcon("forwardActive.png"));
+		forward.setDisabledIcon(new ImageIcon("forwardDisabled.png"));
+
+		JFrame buttonLayout = new JFrame();
+		buttonLayout.setLayout(new FlowLayout());
+		buttonLayout.add(back);
+		buttonLayout.add(back);
+		leftFrame.add(buttonLayout,BorderLayout.NORTH);
+
 		leftPane= new FileTreeReader(
 				new File(
-						"C:\\Users\\user\\Documents\\eclipse-source\\jAudioHelp\\extras\\javadoc"));
+						"."));
+		momento = new FileNodeMomento(leftPane);
+		back.addActionListener(momento.back);
+		forward.addActionListener(momento.forward);
 		rightPane = new HelpViewer(leftPane);
 		
 		JScrollPane rightScroll = new JScrollPane();
@@ -51,6 +71,4 @@ public class HelpWindow extends JFrame {
 		pack();
 		setVisible(true);
 	}
-	
-	
 }

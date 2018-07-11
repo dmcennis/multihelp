@@ -67,12 +67,12 @@ public class JavaStringInternationalisation {
         }
         if(autoTranslate) {
             if (translate == null) {
-                TranslateOptions.Builder builder = TranslateOptions.newBuilder();
-                builder.setTargetLanguage(destinationLocale.getDisplayLanguage());
-                defaultDisplayLanguage = destinationLocale;
-                translate = (new TranslateOptions.DefaultTranslateFactory()).create(builder.build());
+//                TranslateOptions.Builder builder = TranslateOptions.newBuilder();
+//                builder.setTargetLanguage(destinationLocale.getDisplayLanguage());
+//                defaultDisplayLanguage = destinationLocale;
+//                translate = (new TranslateOptions.DefaultTranslateFactory()).create(builder.build());
             }
-            return (translate.translate(source)).getTranslatedText();
+            return source; //(translate.translate(source)).getTranslatedText();
         }else{
             return source;
         }
